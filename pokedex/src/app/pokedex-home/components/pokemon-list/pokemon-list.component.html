@@ -1,0 +1,13 @@
+<h2>My Pokemon</h2>
+<ul class="pokemon-list list-group">
+  <li *ngFor="let pokemon of pokemonListPage" class="list-group-item"> 
+    <a routerLink="/pokemon-detail/{{pokemon.name}}">
+      <span class="badge">{{pokemon.name}}</span> 
+    </a>
+  </li>
+</ul>
+<pagination 
+  [totalItems]="pokemonList.length" 
+  [maxSize]=3
+  (pageChanged)="pageChanged($event)"
+></pagination>
