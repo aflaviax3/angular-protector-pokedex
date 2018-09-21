@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { AllPokemon } from '../../pokedex-home/models/all-pokemon.model';
-import { Pokemon } from '../../models/pokemon.model';
+import { Pokemon } from '../../pokemon-detail/models/pokemon.model';
 
 @Injectable()
 

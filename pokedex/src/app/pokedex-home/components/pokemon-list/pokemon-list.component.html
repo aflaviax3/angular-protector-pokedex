@@ -1,13 +1,32 @@
-<h2>My Pokemon</h2>
-<ul class="pokemon-list list-group">
-  <li *ngFor="let pokemon of pokemonListPage" class="list-group-item"> 
-    <a routerLink="/pokemon-detail/{{pokemon.name}}">
-      <span class="badge">{{pokemon.name}}</span> 
-    </a>
-  </li>
-</ul>
-<pagination 
-  [totalItems]="pokemonList.length" 
-  [maxSize]=3
-  (pageChanged)="pageChanged($event)"
-></pagination>
+
+<div class="row justify-content-center">
+  <div class="col">
+    <ul class="list-group list-group-flush" *ngIf="!pokemonQuery"> 
+      <li *ngFor="let pokemon of pokemonListPage" class="list-group-item"> 
+        <a routerLink="/pokemon-detail/{{pokemon.url | slice:34}}">
+          <span class="text-uppercase font-weight-bold">{{pokemon.name}}</span> 
+        </a>
+      </li>
+    </ul>
+    <ul class="list-group list-group-flush" *ngIf="pokemonQuery"> 
+      <li *ngFor="let pokemon of pokemonFilteredList | pokemonSearch: pokemonQuery" class="list-group-item"> 
+        <a routerLink="/pokemon-detail/{{pokemon.url | slice:34}}">
+          <span class="text-uppercase font-weight-bold">{{pokemon.name}}</span> 
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row justify-content-center fixed-bottom" *ngIf="!pokemonQuery">
+  <div class="col">
+    <pagination 
+      class="justify-content-center"
+      [totalItems]="pokemonList.length" 
+      [maxSize]=3
+      (pageChanged)="pageChanged($event)"
+      [(ngModel)]="currentPage"
+      [itemsPerPage]="9"
+    ></pagination>    
+  </div>
+</div>

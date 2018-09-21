@@ -1,0 +1,9 @@
+<div class="row" *ngIf="pokemonSprites; else loading">
+  <div class="col text-center">
+    <img [src]="spriteFront" alt="" class="col-8">
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

@@ -5,8 +5,9 @@ import { PokedexService } from '../../core/services/pokedex.service';
 @Component({
   selector: 'app-pokedex-home',
   template: `
-  <div *ngIf="pokemonList.length">
-    <app-pokemon-list [pokemonList]="pokemonList"></app-pokemon-list>
+  <div *ngIf="pokemonList?.length" class="pt-4">
+    <app-pokemon-search (searchQuery)="queryReceiver($event)"></app-pokemon-search>
+    <app-pokemon-list [pokemonList]="pokemonList" [pokemonQuery]="pokemonQuery"></app-pokemon-list>
   </div>
   `,
   styleUrls: ['./pokedex-home.component.css']
@@ -14,6 +15,7 @@ import { PokedexService } from '../../core/services/pokedex.service';
 export class PokedexHomeComponent implements OnInit {
 
   pokemonList: ListedPokemon[];
+  pokemonQuery: string;
 
   constructor(private pokedexService: PokedexService) { }
 
@@ -23,6 +25,11 @@ export class PokedexHomeComponent implements OnInit {
         this.pokemonList = data.results;
         console.log(data);
     });
+  }
+
+  queryReceiver(search) {
+    this.pokemonQuery = search;
+    console.log('Foi emitido o evento e chegou no pai >>>> ', search);
   }
 
 }

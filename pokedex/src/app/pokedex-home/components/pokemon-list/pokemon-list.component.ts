@@ -8,20 +8,24 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
   styleUrls: ['./pokemon-list.component.css']
 })
 
-export class PokemonListComponent implements OnInit{
+export class PokemonListComponent implements OnInit {
   
-  @Input()
-  pokemonList: ListedPokemon[];
-
+  @Input() pokemonList: ListedPokemon[];
+  @Input() pokemonQuery: string;
+  
+  public pokemonFilteredList: ListedPokemon[];
   public pokemonListPage: ListedPokemon[];
- 
+  public currentPage:number = 1;
+
   ngOnInit(): void {
-    this.pokemonListPage = this.pokemonList.slice(0, 10);
+    this.pokemonFilteredList = this.pokemonList;
+    this.pokemonListPage = this.pokemonList.slice(0, 9);
   }
  
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
+    this.currentPage = event.page;
     this.pokemonListPage = this.pokemonList.slice(startItem, endItem);
   }
 
