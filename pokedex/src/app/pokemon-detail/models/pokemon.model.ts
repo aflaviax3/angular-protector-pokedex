@@ -25,3 +25,17 @@ export interface PokemonType {
     name: string,
     url: string
 }
+
+export interface PokemonDescription {
+    flavor_text_entries: PokemonFlavorText[];
+}
+
+export interface PokemonFlavorText {
+    flavor_text: string,
+    language: PokemonFlavorTextLanguage    
+}
+
+export interface PokemonFlavorTextLanguage {
+    name: string,
+    url: string
+}
